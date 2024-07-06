@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skylink</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-family: "poppins", sans-serif;
+        font-size: 18px;
+      }
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+      }
+      .container {
+        width: 500px;
+        padding: 30px;
+        border: 1px solid #eeeeee;
+        border-radius: 10px;
+        background-color: #003b5b;
+      }
+      h4 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        color: white;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      textarea {
+        width: 100%;
+        padding: 10px;
+      }
+      #submit {
+        border: none;
+        background-color: orangered;
+        color: white;
+        width: 200px;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+      #submit:hover {
+        background-color: #333333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form
+        action="https://script.google.com/macros/s/AKfycbzIl_cHfMOTwZ9M0zyxpH8iH4DBFwoK9768bYglLxk_62PxVqtQy_rbh5c4kHUOdp8/exec"
+        method="post"
+        name="contact-form"
+      >
+        <h4>Skylink Client Info</h4>
+        <input type="text" name="Last_Name" placeholder="Last Name" />
+        <input type="text" name="First_Name" placeholder="First Name" />
+        <input type="text" name="Middle_Name" placeholder="Middle Name" />
+        <input type="text" name="Device_Number" placeholder="Device Number" />
+        <input type="text" name="Address" placeholder="Address" />
+        <input type="text" name="Speed" placeholder="Mbps" />
+        <input type="text" name="Contact_Number" placeholder="Cp Number" />
+        <input
+          type="Date"
+          placeholder="Date Installed"
+          name="Date"
+          onfocus="this.type='date'"
+          onblur="this.type='text'"
+        />
+        <input type="text" name="Lap" placeholder="Lap" />
+        <select name="installmentType">
+          <option value="">Select Type of Installment</option>
+          <option value="repair">Repair</option>
+          <option value="install">Install</option>
+        </select>
+
+        <input type="submit" value="Submit" id="submit" />
+      </form>
+    </div>
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbzIl_cHfMOTwZ9M0zyxpH8iH4DBFwoK9768bYglLxk_62PxVqtQy_rbh5c4kHUOdp8/exec";
+
+      const form = document.forms["contact-form"];
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then(() => {
+            showAlert("Successfully submitted");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000); // 1 second delay
+          })
+          .catch((error) => console.error("Error!", error.message));
+      });
+
+      function showAlert(message) {
+        window.alert(message);
+      }
+    </script>
+  </body>
+</html>
